@@ -12,13 +12,7 @@ test('examples of some things', async () => {
   // fireEvent.changeText(screen.getByTestId('input'), expectedUsername);
   // fireEvent.press(screen.getByText('Print Username'));
 
-  const usernameOutput = await screen.findByTestId(
-    'printed-username',
-    {},
-    {
-      timeout: 1000,
-    },
-  );
+  const usernameOutput = screen.getByTestId('printed-username');
   expect(usernameOutput.props.children).not.toBe(expectedUsername);
   expect(usernameOutput.props.children).not.toBe(expectedUsername + '123');
 
