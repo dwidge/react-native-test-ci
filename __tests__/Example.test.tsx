@@ -13,7 +13,7 @@ test('examples of some things', async () => {
   const screen = render(<Example />);
 
   await Promise.resolve(true);
-  const ee = await new Promise(r => setTimeout(() => r(true), 300));
+  const ee = await new Promise(r => setTimeout(() => r(true), 3000));
   expect(ee).toBe(true);
 
   fireEvent.changeText(screen.getByTestId('input'), expectedUsername);
@@ -26,4 +26,4 @@ test('examples of some things', async () => {
   // expect(usernameOutput.props.children).not.toBe(expectedUsername + '123');
 
   expect(screen.toJSON()).toMatchSnapshot();
-}, 15000);
+});
