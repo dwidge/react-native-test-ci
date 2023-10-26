@@ -9,8 +9,8 @@ test('examples of some things', async () => {
 
   const screen = render(<Example />);
 
-  // fireEvent.changeText(screen.getByTestId('input'), expectedUsername);
-  // fireEvent.press(screen.getByText('Print Username'));
+  fireEvent.changeText(screen.getByTestId('input'), expectedUsername);
+  fireEvent.press(screen.getByText('Print Username'));
 
   // // Using `findBy` query to wait for asynchronous operation to finish
   // const usernameOutput = await screen.findByTestId('printed-username');
