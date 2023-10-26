@@ -17,6 +17,7 @@ jobs:
           node-version: 20
 
       - uses: actions/cache/restore@v3
+        id: cache
         with:
           path: ~/.npm
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
