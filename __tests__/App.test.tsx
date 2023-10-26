@@ -4,9 +4,9 @@ import {render} from '@testing-library/react-native';
 import React from 'react';
 import App from '../App';
 
-test('renders correctly', () => {
+test('renders correctly', async () => {
   const app = render(<App />);
   // expect(app.toJSON()).toMatchSnapshot();
-  // const element = app.getByText('Layout');
-  // expect(element).toBeDefined();
+  expect(await app.findByText('Layout')).toBeDefined();
+  await expect(app.findByText('Nothing123')).rejects.toThrow();
 });
