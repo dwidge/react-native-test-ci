@@ -13,9 +13,9 @@ test('examples of some things', async () => {
   fireEvent.press(screen.getByText('Print Username'));
 
   // // Using `findBy` query to wait for asynchronous operation to finish
-  // const usernameOutput = await screen.findByTestId('printed-username');
+  const usernameOutput = await screen.findByTestId('printed-username');
 
-  // expect(usernameOutput.props.children).toBe(expectedUsername);
+  expect(usernameOutput.props.children).toBe(expectedUsername);
 
   expect(screen.toJSON()).toMatchSnapshot();
 });
