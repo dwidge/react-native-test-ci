@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 20
 
-      - uses: dwidge/github-cache
+      - uses: dwidge/github-cache@v1
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
