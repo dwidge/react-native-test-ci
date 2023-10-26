@@ -18,12 +18,12 @@ test('examples of some things', async () => {
 
   fireEvent.changeText(screen.getByTestId('input'), expectedUsername);
   fireEvent.press(screen.getByText('Print Username'));
-  // const usernameOutput = await waitFor(
-  //   () => screen.getByTestId('printed-username'),
-  //   {timeout: 1000},
-  // );
-  // expect(usernameOutput.props.children).toBe(expectedUsername);
-  // expect(usernameOutput.props.children).not.toBe(expectedUsername + '123');
+  const usernameOutput = await waitFor(
+    () => screen.getByTestId('printed-username'),
+    {timeout: 1000},
+  );
+  expect(usernameOutput.props.children).toBe(expectedUsername);
+  expect(usernameOutput.props.children).not.toBe(expectedUsername + '123');
 
   expect(screen.toJSON()).toMatchSnapshot();
 });

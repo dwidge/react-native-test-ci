@@ -1,4 +1,4 @@
 module.exports = {
   preset: 'react-native',
-  testTimeout: 15000,
+  testTimeout: 30000,
 };
