@@ -1,10 +1,12 @@
-import {test, expect} from '@jest/globals';
+import {jest, test, expect} from '@jest/globals';
 import {render, fireEvent, waitFor} from '@testing-library/react-native';
 
 import React from 'react';
 import {Example} from '../components/Example';
 
 test('examples of some things', async () => {
+  jest.useFakeTimers();
+  jest.advanceTimersByTime(2000);
   const expectedUsername = 'Ada Lovelace';
 
   const screen = render(<Example />);
@@ -13,7 +15,7 @@ test('examples of some things', async () => {
   fireEvent.press(screen.getByText('Print Username'));
   const usernameOutput = await waitFor(
     () => screen.getByTestId('printed-username'),
-    {timeout: 1},
+    {timeout: 1000},
   );
   // expect(usernameOutput.props.children).toBe(expectedUsername);
   // expect(usernameOutput.props.children).not.toBe(expectedUsername + '123');
