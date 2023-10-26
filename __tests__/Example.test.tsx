@@ -13,7 +13,7 @@ test('examples of some things', async () => {
   const screen = render(<Example />);
 
   await Promise.resolve(true);
-  const ee = await new Promise(r => setTimeout(() => r(true), 3000));
+  const ee = await new Promise(r => setTimeout(() => r(true), 300));
   expect(ee).toBe(true);
 
   fireEvent.changeText(screen.getByTestId('input'), expectedUsername);
