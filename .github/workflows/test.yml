@@ -13,8 +13,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: bahmutov/npm-install@v1
+      - uses: actions/setup-node@v3
         with:
-          useLockFile: false
+          node-version: 20
+
+      - id: cache
+        uses: actions/cache/restore@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+
+      - if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
       - run: npm test
