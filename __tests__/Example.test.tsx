@@ -1,11 +1,12 @@
 import {jest, test, expect} from '@jest/globals';
 import {render, fireEvent, waitFor} from '@testing-library/react-native';
+jest.useRealTimers();
 
 import React from 'react';
 import {Example} from '../components/Example';
 
 test('examples of some things', async () => {
-  jest.useFakeTimers();
+  // jest.useFakeTimers();
   jest.advanceTimersByTime(2000);
   const expectedUsername = 'Ada Lovelace';
 
