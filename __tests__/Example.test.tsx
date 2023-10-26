@@ -1,18 +1,20 @@
 import {jest, test, expect} from '@jest/globals';
 import {render, fireEvent, waitFor} from '@testing-library/react-native';
-jest.useRealTimers();
+// jest.useRealTimers();
 
 import React from 'react';
 import {Example} from '../components/Example';
 
 test('examples of some things', async () => {
   // jest.useFakeTimers();
-  jest.advanceTimersByTime(2000);
+  // jest.advanceTimersByTime(2000);
   const expectedUsername = 'Ada Lovelace';
 
   const screen = render(<Example />);
 
   await Promise.resolve(true);
+  const ee = await new Promise(r => setTimeout(() => r(true), 3000));
+  expect(ee).toBe(true);
 
   fireEvent.changeText(screen.getByTestId('input'), expectedUsername);
   fireEvent.press(screen.getByText('Print Username'));
