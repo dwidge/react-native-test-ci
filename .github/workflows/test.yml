@@ -7,24 +7,19 @@ on:
     branches: '*'
 
 jobs:
-  setup:
+  test:
     runs-on: ubuntu-latest
+    timeout-minutes: 1
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
           node-version: 20
 
-  cache:
-    runs-on: ubuntu-latest
-    uses: ./.github/workflows/cache.yml
-    with:
-      path: node_modules
-      key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-      run: npm ci
+      - uses: dwidge/github-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          run: npm ci
 
-  test:
-    runs-on: ubuntu-latest
-    timeout-minutes: 1
-    steps:
       - run: npm test
