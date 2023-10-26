@@ -1,17 +1,12 @@
-/**
- * @format
- */
+import {test, expect} from '@jest/globals';
+import {render} from '@testing-library/react-native';
 
-import 'react-native';
 import React from 'react';
 import App from '../App';
 
-// Note: import explicitly to use the types shiped with jest.
-import {it} from '@jest/globals';
-
-// Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
-
-it('renders correctly', () => {
-  renderer.create(<App />);
+test('renders correctly', () => {
+  const app = render(<App />);
+  expect(app.toJSON()).toMatchSnapshot();
+  const element = app.getByText('Layout');
+  expect(element).toBeDefined();
 });
