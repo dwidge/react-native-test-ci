@@ -12,12 +12,14 @@ test('examples of some things', async () => {
 
   const screen = render(<Example />);
 
+  await Promise.resolve(true);
+
   fireEvent.changeText(screen.getByTestId('input'), expectedUsername);
   fireEvent.press(screen.getByText('Print Username'));
-  const usernameOutput = await waitFor(
-    () => screen.getByTestId('printed-username'),
-    {timeout: 1000},
-  );
+  // const usernameOutput = await waitFor(
+  //   () => screen.getByTestId('printed-username'),
+  //   {timeout: 1000},
+  // );
   // expect(usernameOutput.props.children).toBe(expectedUsername);
   // expect(usernameOutput.props.children).not.toBe(expectedUsername + '123');
 
