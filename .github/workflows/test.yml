@@ -15,5 +15,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 20
+
+      - uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}
+
       - run: npm ci
       - run: npm test
