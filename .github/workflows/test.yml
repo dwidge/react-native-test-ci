@@ -16,10 +16,17 @@ jobs:
         with:
           node-version: 20
 
-      - uses: actions/cache/save@v3
+      - uses: actions/cache/restore@v3
         with:
           path: ~/.npm
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
       - run: npm ci
+        if: steps.cache.outputs.cache-hit != 'true'
+      - uses: actions/cache/save@v3
+        if: steps.cache.outputs.cache-hit != 'true'
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+
       - run: npm test
