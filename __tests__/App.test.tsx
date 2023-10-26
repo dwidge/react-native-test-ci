@@ -7,6 +7,6 @@ import App from '../App';
 test('renders correctly', async () => {
   const app = render(<App />);
   expect(app.toJSON()).toMatchSnapshot();
-  expect(await app.findByText('Layout')).toBeDefined();
+  await app.findByText('Layout');
   await expect(app.findByText('Nothing123')).rejects.toThrow();
 });
