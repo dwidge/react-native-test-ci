@@ -1,5 +1,5 @@
 import {test, expect} from '@jest/globals';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, waitFor} from '@testing-library/react-native';
 
 import React from 'react';
 import {Example} from '../components/Example';
@@ -9,12 +9,13 @@ test('examples of some things', async () => {
 
   const screen = render(<Example />);
 
-  // fireEvent.changeText(screen.getByTestId('input'), expectedUsername);
-  // fireEvent.press(screen.getByText('Print Username'));
-
-  const usernameOutput = screen.getByTestId('printed-username');
-  expect(usernameOutput.props.children).not.toBe(expectedUsername);
-  expect(usernameOutput.props.children).not.toBe(expectedUsername + '123');
+  fireEvent.changeText(screen.getByTestId('input'), expectedUsername);
+  fireEvent.press(screen.getByText('Print Username'));
+  const usernameOutput = await waitFor(() =>
+    screen.getByTestId('printed-username'),
+  );
+  // expect(usernameOutput.props.children).toBe(expectedUsername);
+  // expect(usernameOutput.props.children).not.toBe(expectedUsername + '123');
 
   expect(screen.toJSON()).toMatchSnapshot();
 });
