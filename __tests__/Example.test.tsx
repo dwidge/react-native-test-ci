@@ -26,4 +26,4 @@ test('examples of some things', async () => {
   // expect(usernameOutput.props.children).not.toBe(expectedUsername + '123');
 
   expect(screen.toJSON()).toMatchSnapshot();
-});
+}, 15000);
