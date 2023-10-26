@@ -3,7 +3,7 @@
 exports[`examples of some things 1`] = `
 <View>
   <TextInput
-    defaultValue="Ada Lovelace"
+    defaultValue=""
     onChangeText={[Function]}
     testID="input"
   />
@@ -65,10 +65,5 @@ exports[`examples of some things 1`] = `
       </Text>
     </View>
   </View>
-  <Text
-    testID="printed-username"
-  >
-    Ada Lovelace
-  </Text>
 </View>
 `;
