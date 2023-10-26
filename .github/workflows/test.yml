@@ -7,29 +7,24 @@ on:
     branches: '*'
 
 jobs:
-  test:
+  setup:
     runs-on: ubuntu-latest
-    timeout-minutes: 1
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v3
         with:
           node-version: 20
 
-      - id: cache
-        uses: actions/cache/restore@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+  cache:
+    runs-on: ubuntu-latest
+    uses: ./.github/workflows/cache.yml
+    with:
+      path: node_modules
+      key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+      run: npm ci
 
-      - if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
-
-      - if: steps.cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
       - run: npm test

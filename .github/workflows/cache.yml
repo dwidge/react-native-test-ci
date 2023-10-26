@@ -1,0 +1,34 @@
+# cache-workflow.yml
+
+name: Cache
+
+on:
+  workflow_call:
+    inputs:
+      path:
+        required: true
+        type: string
+      key:
+        required: true
+        type: string
+      run:
+        required: true
+        type: string
+
+jobs:
+  cache:
+    steps:
+      - id: cache
+        uses: actions/cache/restore@v3
+        with:
+          path: ${{ inputs.path }}
+          key: ${{ inputs.key }}
+
+      - if: steps.cache.outputs.cache-hit != 'true'
+        run: ${{ inputs.run }}
+
+      - if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v3
+        with:
+          path: ${{ inputs.path }}
+          key: ${{ inputs.key }}
